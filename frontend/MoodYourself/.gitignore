@@ -1,0 +1,32 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Frontend
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Lambda deployment packages
+*.zip
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+
+# Terraform reserved for Phase 2
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
