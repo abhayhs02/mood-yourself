@@ -7,7 +7,7 @@ resource "aws_lambda_function" "moods_api" {
   handler = "lambda_function.lambda_handler"
 
   architectures = [
-    "x86_64"
+    "arm64"
   ]
 
   memory_size = 128
@@ -29,7 +29,6 @@ resource "aws_lambda_function" "moods_api" {
   }
 }
 
-
 resource "aws_lambda_function" "image_api" {
   function_name = var.image_lambda_name
 
@@ -39,7 +38,7 @@ resource "aws_lambda_function" "image_api" {
   handler = "lambda_function.lambda_handler"
 
   architectures = [
-    "x86_64"
+    "arm64"
   ]
 
   memory_size = 128
