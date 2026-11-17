@@ -38,3 +38,13 @@ variable "frontend_dev_origin" {
   type        = string
   default     = "http://localhost:5173"
 }
+
+variable "moods_lambda_role_name" {
+  description = "Execution role name for the moods Lambda"
+  type        = string
+}
+
+variable "image_lambda_role_name" {
+  description = "Execution role name for the image Lambda"
+  type        = string
+}
