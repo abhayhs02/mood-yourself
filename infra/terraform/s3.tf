@@ -25,8 +25,7 @@ resource "aws_s3_bucket_cors_configuration" "mood_images" {
     ]
 
     allowed_origins = [
-  "http://localhost:5173",
-  "http://localhost:5174"
+  "http://localhost:5176"
 ]
 
     expose_headers = [
