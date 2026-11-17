@@ -13,6 +13,8 @@ resource "aws_lambda_function" "moods_api" {
   memory_size = 128
   timeout     = 3
 
+  filename = "${path.module}/lambda-bootstrap.zip"
+
   environment {
     variables = {
       MOODS_TABLE = aws_dynamodb_table.moods.name
@@ -26,6 +28,7 @@ resource "aws_lambda_function" "moods_api" {
     ]
   }
 }
+
 
 resource "aws_lambda_function" "image_api" {
   function_name = var.image_lambda_name
@@ -41,6 +44,8 @@ resource "aws_lambda_function" "image_api" {
 
   memory_size = 128
   timeout     = 3
+
+  filename = "${path.module}/lambda-bootstrap.zip"
 
   environment {
     variables = {
