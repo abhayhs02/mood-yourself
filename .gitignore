@@ -74,3 +74,6 @@ Thumbs.db
 **/.terraform/
 *.tfstate
 *.tfstate.*
+
+# Terraform generated Lambda bootstrap package
+infra/terraform/lambda-bootstrap.zip
