@@ -36,7 +36,7 @@ variable "api_name" {
 variable "frontend_dev_origin" {
   description = "Local React development origin allowed by CORS"
   type        = string
-  default     = "http://localhost:5173"
+  default     = "http://localhost:5176
 }
 
 variable "moods_lambda_role_name" {
