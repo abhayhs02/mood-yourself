@@ -67,12 +67,12 @@ resource "aws_apigatewayv2_integration" "post_image_upload" {
   timeout_milliseconds   = 30000
 }
 
-resource "aws_apigatewayv2_route" "get_moods" {
+esource "aws_apigatewayv2_route" "get_moods" {
   api_id = aws_apigatewayv2_api.mood_yourself.id
 
   route_key = "GET /moods"
 
-  target = "integrations/${aws_apigatewayv2_integration.moods_api.id}"
+  target = "integrations/${aws_apigatewayv2_integration.get_moods.id}"
 }
 
 resource "aws_apigatewayv2_route" "put_moods" {
@@ -80,15 +80,7 @@ resource "aws_apigatewayv2_route" "put_moods" {
 
   route_key = "PUT /moods"
 
-  target = "integrations/${aws_apigatewayv2_integration.moods_api.id}"
-}
-
-resource "aws_apigatewayv2_route" "post_image_upload" {
-  api_id = aws_apigatewayv2_api.mood_yourself.id
-
-  route_key = "POST /moods/image-upload"
-
-  target = "integrations/${aws_apigatewayv2_integration.image_api.id}"
+  target = "integrations/${aws_apigatewayv2_integration.put_moods.id}"
 }
 
 resource "aws_apigatewayv2_route" "get_image" {
@@ -96,7 +88,15 @@ resource "aws_apigatewayv2_route" "get_image" {
 
   route_key = "GET /moods/image"
 
-  target = "integrations/${aws_apigatewayv2_integration.image_api.id}"
+  target = "integrations/${aws_apigatewayv2_integration.get_image.id}"
+}
+
+resource "aws_apigatewayv2_route" "post_image_upload" {
+  api_id = aws_apigatewayv2_api.mood_yourself.id
+
+  route_key = "POST /moods/image-upload"
+
+  target = "integrations/${aws_apigatewayv2_integration.post_image_upload.id}"
 }
 
 resource "aws_lambda_permission" "api_gateway_moods" {
