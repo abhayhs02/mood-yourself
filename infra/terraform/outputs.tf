@@ -32,3 +32,8 @@ output "api_endpoint" {
   description = "Invoke endpoint for the Mood Yourself HTTP API"
   value       = aws_apigatewayv2_api.mood_yourself.api_endpoint
 }
+
+output "github_lambda_deploy_role_arn" {
+  description = "IAM role assumed by GitHub Actions for Lambda code deployment"
+  value       = aws_iam_role.github_lambda_deploy.arn
+}
