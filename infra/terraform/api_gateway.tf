@@ -27,22 +27,44 @@ resource "aws_apigatewayv2_stage" "default" {
   auto_deploy = true
 }
 
-resource "aws_apigatewayv2_integration" "moods_api" {
+resource "aws_apigatewayv2_integration" "get_moods" {
   api_id = aws_apigatewayv2_api.mood_yourself.id
 
   integration_type       = "AWS_PROXY"
   integration_method     = "POST"
-  integration_uri        = aws_lambda_function.moods_api.invoke_arn
+  integration_uri        = aws_lambda_function.moods_api.arn
   payload_format_version = "2.0"
+  timeout_milliseconds   = 30000
 }
 
-resource "aws_apigatewayv2_integration" "image_api" {
+resource "aws_apigatewayv2_integration" "put_moods" {
   api_id = aws_apigatewayv2_api.mood_yourself.id
 
   integration_type       = "AWS_PROXY"
   integration_method     = "POST"
-  integration_uri        = aws_lambda_function.image_api.invoke_arn
+  integration_uri        = aws_lambda_function.moods_api.arn
   payload_format_version = "2.0"
+  timeout_milliseconds   = 30000
+}
+
+resource "aws_apigatewayv2_integration" "get_image" {
+  api_id = aws_apigatewayv2_api.mood_yourself.id
+
+  integration_type       = "AWS_PROXY"
+  integration_method     = "POST"
+  integration_uri        = aws_lambda_function.image_api.arn
+  payload_format_version = "2.0"
+  timeout_milliseconds   = 30000
+}
+
+resource "aws_apigatewayv2_integration" "post_image_upload" {
+  api_id = aws_apigatewayv2_api.mood_yourself.id
+
+  integration_type       = "AWS_PROXY"
+  integration_method     = "POST"
+  integration_uri        = aws_lambda_function.image_api.arn
+  payload_format_version = "2.0"
+  timeout_milliseconds   = 30000
 }
 
 resource "aws_apigatewayv2_route" "get_moods" {
