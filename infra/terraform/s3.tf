@@ -25,8 +25,8 @@ resource "aws_s3_bucket_cors_configuration" "mood_images" {
     ]
 
     allowed_origins = [
-  var.frontend_dev_origin
-]
+      var.frontend_dev_origin
+    ]
 
     expose_headers = [
       "ETag"

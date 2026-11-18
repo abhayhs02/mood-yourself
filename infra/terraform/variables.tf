@@ -48,3 +48,15 @@ variable "image_lambda_role_name" {
   description = "Execution role name for the image Lambda"
   type        = string
 }
+
+variable "github_repository" {
+  description = "GitHub repository allowed to deploy Lambda code"
+  type        = string
+  default     = "abhayhs02/mood-yourself"
+}
+
+variable "github_lambda_deploy_role_name" {
+  description = "IAM role assumed by GitHub Actions for Lambda deployment"
+  type        = string
+  default     = "GitHubActionsLambdaDeployRole"
+}
