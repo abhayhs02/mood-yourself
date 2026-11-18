@@ -67,7 +67,7 @@ resource "aws_apigatewayv2_integration" "post_image_upload" {
   timeout_milliseconds   = 30000
 }
 
-esource "aws_apigatewayv2_route" "get_moods" {
+resource "aws_apigatewayv2_route" "get_moods" {
   api_id = aws_apigatewayv2_api.mood_yourself.id
 
   route_key = "GET /moods"
