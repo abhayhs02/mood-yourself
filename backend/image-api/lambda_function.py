@@ -22,9 +22,9 @@ ALLOWED_CONTENT_TYPES = {
 }
 
 
-def build_response(status_code, body):
+def build_response(statusr_code, body):
     return {
-        "statusCode": status_code,
+        "statusCode": statusr_code,
         "headers": {
             "Content-Type": "application/json"
         },
