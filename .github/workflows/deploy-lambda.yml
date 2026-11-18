@@ -1,0 +1,67 @@
+name: Deploy Lambdas
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  AWS_REGION: ap-southeast-2
+
+jobs:
+  deploy:
+    name: Deploy Lambda code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile Lambda functions
+        run: |
+          python -m py_compile backend/moods-api/lambda_function.py
+          python -m py_compile backend/image-api/lambda_function.py
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Package Moods Lambda
+        run: |
+          cd backend/moods-api
+          zip -q ../../moods-api.zip lambda_function.py
+
+      - name: Package Image Lambda
+        run: |
+          cd backend/image-api
+          zip -q ../../image-api.zip lambda_function.py
+
+      - name: Deploy Moods Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name MoodYourself-MoodsApi \
+            --zip-file fileb://moods-api.zip
+
+      - name: Deploy Image Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name MoodYourself-ImageApi \
+            --zip-file fileb://image-api.zip
